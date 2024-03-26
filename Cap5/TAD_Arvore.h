@@ -47,7 +47,5 @@ int EhFolha(pDArvore, void *, FuncaoComparacao);
 int ArvoreVazia(pDArvore);
 pNohArvore EncontrarMenor(pNohArvore raiz);
 void DesenhaArvore(pDArvore, FuncaoImpressao);
-void Balancear(pDArvore arvore);
-void RecalcularFB(pDArvore arvore);
 
 #endif
