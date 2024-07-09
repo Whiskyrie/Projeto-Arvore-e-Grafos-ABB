@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include <stdlib.h>
 #include "Utils.h"
 #include "ArvoreBinaria.h"
@@ -29,15 +30,23 @@ int main()
 
         switch (opcao)
         {
+
         case 1:
-            printf("Digite o valor a ser inserido: ");
-            scanf("%d", &valorInserido);
-            IncluirInfo(pArvoreInt, AlocaInt(valorInserido), ComparaInt);
-            printf("Valor %d inserido na arvore!\n", valorInserido);
+            srand(time(NULL)); // Inicializa a semente para números aleatórios
+            int t = clock();   // armazena tempo
+            for (int i = 0; i < 10000; i++)
+            {
+                valorInserido = rand() % 10000; // Gera um número aleatório entre 0 e 999
+                IncluirInfo(pArvoreInt, AlocaInt(valorInserido), ComparaInt);
+            }
+            t = clock() - t; // tempo final - tempo inicial
+            printf("Tempo de execucao: %lf", ((double)t) / ((CLOCKS_PER_SEC / 1000)));
+
             break;
         case 2:
             DesenhaArvore(pArvoreInt, ImprimeInt);
             break;
+
         case 3:
             printf("Altura da Arvore: %d\n", Altura(pArvoreInt));
             break;

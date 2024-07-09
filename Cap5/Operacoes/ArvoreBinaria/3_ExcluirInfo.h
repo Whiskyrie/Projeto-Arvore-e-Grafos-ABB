@@ -44,11 +44,21 @@ pNohArvore ExcluirInfoRecursivo(pNohArvore raiz, void *info, FuncaoComparacao pf
             free(raiz);
             return temp;
         }
+        else
+        {
+            pNohArvore aux = raiz->direita;
+            while (aux->esquerda != NULL)
+            {
+                aux = aux->esquerda;
+            }
+            // Troca as informações
+            void *temp_info = raiz->info;
+            raiz->info = aux->info;
+            aux->info = temp_info;
 
-        // Caso 3: O nó a ser excluído tem os dois filhos
-        pNohArvore temp = EncontrarMenor(raiz->direita);
-        raiz->info = temp->info;
-        raiz->direita = ExcluirInfoRecursivo(raiz->direita, temp->info, pfc);
+            // Exclui o nó sucessor da subárvore direita
+            raiz->direita = ExcluirInfoRecursivo(raiz->direita, info, pfc);
+        }
     }
 
     return raiz;
