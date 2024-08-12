@@ -29,4 +29,5 @@
 
 #include "Operacoes/ArvoreBinaria/12_EncontraMenor.h"
 
+#include "Operacoes/ArvoreBinaria/13_RealizarBenchmark.h"
 #endif

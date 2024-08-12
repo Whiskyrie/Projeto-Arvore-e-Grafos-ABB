@@ -4,6 +4,24 @@
 #include "Utils.h"
 #include "ArvoreBinaria.h"
 
+pDArvore ConstroiArvore(int raiz)
+{
+    pDArvore arvore = CriarArvore(raiz);
+    int num;
+
+    printf("Digite os valores para inserir na arvore (0 para sair): ");
+    scanf("%d", &num);
+
+    while (num != 0)
+    {
+        IncluirInfo(arvore, AlocaInt(num), ComparaInt);
+        DesenhaArvore(arvore, ImprimeInt);
+        printf("Digite os valores para inserir na arvore (0 para sair): ");
+        scanf("%d", &num);
+    }
+
+    return arvore;
+}
 int main()
 {
     pDArvore pArvoreInt;
@@ -11,7 +29,7 @@ int main()
 
     printf("Informe a raiz da arvore: ");
     scanf("%d", &raiz);
-    pArvoreInt = CriarArvore(raiz);
+    pArvoreInt = ConstroiArvore(raiz);
 
     do
     {
@@ -24,6 +42,7 @@ int main()
         printf("5. Calcular Quantidade de Nos\n");
         printf("6. Buscar Valor na Arvore\n");
         printf("7. Excluir Valor da Arvore\n");
+        printf("8. Benchmark\n");
         printf("0. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
@@ -32,16 +51,10 @@ int main()
         {
 
         case 1:
-            srand(time(NULL)); // Inicializa a semente para números aleatórios
-            int t = clock();   // armazena tempo
-            for (int i = 0; i < 10000; i++)
-            {
-                valorInserido = rand() % 10000; // Gera um número aleatório entre 0 e 999
-                IncluirInfo(pArvoreInt, AlocaInt(valorInserido), ComparaInt);
-            }
-            t = clock() - t; // tempo final - tempo inicial
-            printf("Tempo de execucao: %lf", ((double)t) / ((CLOCKS_PER_SEC / 1000)));
-
+            printf("Digite o valor a ser inserido: ");
+            scanf("%d", &valorInserido);
+            IncluirInfo(pArvoreInt, AlocaInt(valorInserido), ComparaInt);
+            printf("Valor %d inserido na arvore!\n", valorInserido);
             break;
         case 2:
             DesenhaArvore(pArvoreInt, ImprimeInt);
@@ -73,6 +86,10 @@ int main()
             scanf("%d", &valorBuscado);
             ExcluirInfo(pArvoreInt, AlocaInt(valorBuscado), ComparaInt);
             printf("Valor %d excluido da arvore!\n", valorBuscado);
+            break;
+        case 8:
+            printf("Benchmark Iniciado!\n");
+            realizarBenchmark(pArvoreInt);
             break;
         case 0:
             printf("Saindo...\n");
